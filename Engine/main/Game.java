@@ -51,10 +51,10 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
 
         if(gameState == STATE.Game){
+            handler.addObject(new Box(0,0,ID.box));
             handler.addObject(new Player(100,100,ID.player,handler));
             handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
             handler.addObject(new SmartEnemy(250,300,ID.smartEnemy,handler));
-            handler.addObject(new Box(100,100,ID.box));
         }
     }
 
@@ -139,7 +139,7 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
         Graphics2D g2d = (Graphics2D) g;
 
-        g.setColor(Color.GRAY);
+        g.setColor(Color.BLACK);
         g.fillRect(0,0,WIDTH,HEIGHT);
 
         g2d.translate(-cam.getX(),-cam.getY());

@@ -5,5 +5,5 @@ public enum ID {
     enemy(),
     smartEnemy(),
     trail(),
-
+    box(),
 }

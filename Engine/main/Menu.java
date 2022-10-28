@@ -1,5 +1,6 @@
 package Engine.main;
 
+import Engine.main.Objects.Box;
 import Engine.main.Objects.Player;
 import Engine.main.Objects.SmartEnemy;
 
@@ -31,6 +32,7 @@ public class Menu extends MouseAdapter{
                 game.gameState = Game.STATE.Game;
                 handler.addObject(new Player(100,100,ID.player,handler));
                 handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+                handler.addObject(new Box(100,100,ID.box));
             }
             // help button
             if (mouseOver(mx, my, 210, 250, 200, 64)){

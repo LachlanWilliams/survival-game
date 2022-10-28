@@ -1,5 +1,6 @@
 package Engine.main;
 
+import Engine.main.Objects.Box;
 import Engine.main.Objects.Enemy;
 import Engine.main.Objects.Player;
 import Engine.main.KeyInput;
@@ -23,6 +24,7 @@ public class Game extends Canvas implements Runnable {
     private HUD hud;
     private Spawn spawner;
     private Menu menu;
+    private Camera cam;
 
     public enum STATE {
         Menu,
@@ -42,6 +44,7 @@ public class Game extends Canvas implements Runnable {
         menu = new Menu(handler,this,hud);
         this.addKeyListener(new KeyInput(handler,this));
         this.addMouseListener(menu);
+        cam = new Camera(0,0,handler);
 
         //AudioPlayer.load();
 
@@ -50,6 +53,8 @@ public class Game extends Canvas implements Runnable {
         if(gameState == STATE.Game){
             handler.addObject(new Player(100,100,ID.player,handler));
             handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+            handler.addObject(new SmartEnemy(250,300,ID.smartEnemy,handler));
+            handler.addObject(new Box(100,100,ID.box));
         }
     }
 
@@ -109,6 +114,7 @@ public class Game extends Canvas implements Runnable {
                 handler.tick();
                 hud.tick();
                 spawner.tick();
+                cam.tick();
                 if(hud.HEALTH<=0){
                     HUD.HEALTH=100;
                     gameState = STATE.End;
@@ -131,11 +137,16 @@ public class Game extends Canvas implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
+        Graphics2D g2d = (Graphics2D) g;
 
         g.setColor(Color.GRAY);
         g.fillRect(0,0,WIDTH,HEIGHT);
 
+        g2d.translate(-cam.getX(),-cam.getY());
+
         handler.render(g);
+
+        g2d.translate(cam.getX(),cam.getY());
 
         if(paused){
             g.setColor(Color.RED);

@@ -121,6 +121,7 @@ public class Menu extends MouseAdapter{
             g.drawString("Back", 275, 390);
 
         }else if(game.gameState == Game.STATE.End){
+
             Font fnt = new Font("arial", 1, 50);
             Font fnt2 = new Font("arial", 1, 30);
 

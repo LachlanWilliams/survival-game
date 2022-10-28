@@ -2,7 +2,9 @@ package Engine.main;
 
 import Engine.main.Objects.GameObject;
 
-public class Camera {
+import java.awt.*;
+
+public class Camera{
 
     private  int x,y;
     private Handler handler;
@@ -27,9 +29,10 @@ public class Camera {
 
     public void tick() {
         if(tempPlayer != null){
-            x = (int) tempPlayer.getX() - Game.WIDTH/2;
-            y = (int) tempPlayer.getY() - Game.HEIGHT/2;
+            this.x = (int) tempPlayer.getX() - Game.WIDTH/2;
+            this.y = (int) tempPlayer.getY() - Game.HEIGHT/2;
         }else findPlayer();
+
     }
 
     public int getX(){
@@ -38,5 +41,9 @@ public class Camera {
 
     public int getY(){
         return y;
+    }
+
+    public void reset(){
+        tempPlayer = null;
     }
 }

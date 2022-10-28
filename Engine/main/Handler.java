@@ -58,4 +58,11 @@ public class Handler {
             }
         }
     }
+    public void removePlayer(){
+        for(int i = 0; i < objects.size(); i++){
+            if(objects.get(i).getId() == ID.player){
+                objects.remove(objects.get(i));
+            }
+        }
+    }
 }

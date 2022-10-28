@@ -119,6 +119,7 @@ public class Game extends Canvas implements Runnable {
                     HUD.HEALTH=100;
                     gameState = STATE.End;
                     handler.clearEnemys();
+                    cam.reset();
                 }
             }
         }else if(gameState == STATE.Help||gameState == STATE.Menu||gameState == STATE.End){
@@ -139,14 +140,15 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
         Graphics2D g2d = (Graphics2D) g;
 
+        //TODO: remove box and change general background
         g.setColor(Color.BLACK);
         g.fillRect(0,0,WIDTH,HEIGHT);
 
-        g2d.translate(-cam.getX(),-cam.getY());
+        g2d.translate( -cam.getX(), -cam.getY());
 
         handler.render(g);
 
-        g2d.translate(cam.getX(),cam.getY());
+        g2d.translate( cam.getX(), cam.getY());
 
         if(paused){
             g.setColor(Color.RED);

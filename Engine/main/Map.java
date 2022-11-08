@@ -18,6 +18,10 @@ public class Map {
         //TODO: attach game clamp to this
     }
 
+    public void pause(){
+        //TODO: this could augment a status that tick would check
+    }
+
     public void tick(){
         hud.tick();
     }

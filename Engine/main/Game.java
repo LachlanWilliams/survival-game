@@ -25,6 +25,7 @@ public class Game extends Canvas implements Runnable {
     private Spawn spawner;
     private Menu menu;
     private Camera cam;
+    private Map map;
 
     public enum STATE {
         Menu,
@@ -45,6 +46,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler,this));
         this.addMouseListener(menu);
         cam = new Camera(0,0,handler);
+        map = new Map(this,handler,hud);
 
         //AudioPlayer.load();
 
@@ -112,8 +114,7 @@ public class Game extends Canvas implements Runnable {
         if (gameState == STATE.Game) {
             if(!paused){
                 handler.tick();
-                hud.tick();
-                spawner.tick();
+                map.tick();
                 cam.tick();
                 if(hud.HEALTH<=0){
                     HUD.HEALTH=100;
@@ -156,7 +157,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         if (gameState == STATE.Game){
-            hud.render(g);
+            map.render(g);
         }else if(gameState == STATE.Menu || gameState == STATE.Help|| gameState == STATE.End){
             menu.render(g);
         }

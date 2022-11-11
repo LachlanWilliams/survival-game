@@ -31,18 +31,21 @@ public class Map {
         handler.addObject(new Box(0,0,ID.box));
         handler.addObject(new Player(100,100,ID.player,handler));
         handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
-        handler.addObject(new SmartEnemy(250,300,ID.smartEnemy,handler));
     }
 
     public void pause(){
         //TODO: this could augment a status that tick would check
     }
 
+    public void hudReset(){
+        hud.reset();
+    }
+
     public void tick(){
         hud.tick();
         spawner.tick();
-
     }
+
     public void render(Graphics g){
         // TODO: make the map here
         hud.render(g);

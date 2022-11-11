@@ -42,21 +42,18 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler(this);
         hud = new HUD();
         spawner = new Spawn(handler,hud);
-        menu = new Menu(handler,this,hud);
+        map = new Map(this,handler,hud);
+        menu = new Menu(handler,this,hud,map);
         this.addKeyListener(new KeyInput(handler,this));
         this.addMouseListener(menu);
         cam = new Camera(0,0,handler);
-        map = new Map(this,handler,hud);
 
         //AudioPlayer.load();
 
         new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
 
         if(gameState == STATE.Game){
-            handler.addObject(new Box(0,0,ID.box));
-            handler.addObject(new Player(100,100,ID.player,handler));
-            handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
-            handler.addObject(new SmartEnemy(250,300,ID.smartEnemy,handler));
+            map.play();
         }
     }
 

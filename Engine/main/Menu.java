@@ -14,11 +14,13 @@ public class Menu extends MouseAdapter{
     private Game game;
     private Handler handler;
     private HUD hud;
+    private Map map;
 
-    public Menu(Handler handler, Game game, HUD hud){
+    public Menu(Handler handler, Game game, HUD hud, Map map){
         this.game = game;
         this.handler = handler;
         this.hud = hud;
+        this.map = map;
     }
 
     public void mousePressed(MouseEvent e){
@@ -30,9 +32,7 @@ public class Menu extends MouseAdapter{
             // play button
             if(mouseOver(mx, my, 210, 150, 200, 64)){
                 game.gameState = Game.STATE.Game;
-                handler.addObject(new Box(0,0,ID.box));
-                handler.addObject(new Player(100,100,ID.player,handler));
-                handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+                map.play();
             }
             // help button
             if (mouseOver(mx, my, 210, 250, 200, 64)){
@@ -57,7 +57,7 @@ public class Menu extends MouseAdapter{
         if(game.gameState == Game.STATE.End){
             if(mouseOver(mx, my, 210, 350, 200, 64)){
                 game.gameState = Game.STATE.Menu;
-                hud.reset();
+                map.hudReset();
                 return;
             }
         }

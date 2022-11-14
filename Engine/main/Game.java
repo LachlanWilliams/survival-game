@@ -27,6 +27,8 @@ public class Game extends Canvas implements Runnable {
     private Camera cam;
     private Map map;
 
+    public static int mapWIDTH, mapHEIGHT;
+
     public enum STATE {
         Menu,
         Help,
@@ -48,9 +50,13 @@ public class Game extends Canvas implements Runnable {
         this.addMouseListener(menu);
         cam = new Camera(0,0,handler);
 
+        mapWIDTH = map.getWIDTH();
+        mapHEIGHT = map.getHEIGHT();
+
         //AudioPlayer.load();
 
-        new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
+        //new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
+        new Window(640,480,"RANDOM CUBE GAME",this);
 
         if(gameState == STATE.Game){
             map.play();
@@ -142,8 +148,12 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.BLACK);
         g.fillRect(0,0,WIDTH,HEIGHT);
 
+
         g2d.translate( -cam.getX(), -cam.getY());
 
+        if (gameState == STATE.Game){
+            map.display(g);
+        }
         handler.render(g);
 
         g2d.translate( cam.getX(), cam.getY());

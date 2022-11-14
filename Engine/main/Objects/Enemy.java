@@ -25,8 +25,8 @@ public class Enemy extends GameObject {
         x += velX;
         y += velY;
 
-        if(y <= 0 || y >= Game.HEIGHT-32) velY *= -1;
-        if(x <= 0 || x >= Game.WIDTH-16) velX *= -1;
+        if(y <= 0 || y >= Game.mapHEIGHT-32) velY *= -1;
+        if(x <= 0 || x >= Game.mapWIDTH-16) velX *= -1;
 
         handler.addObject(new Trail((int)x,(int)y,ID.trail,Color.red,16,16, 0.1f,handler));
     }

@@ -23,6 +23,7 @@ public class SmartEnemy extends GameObject {
             }
         }
 
+        //TODO: review this
         velX = 5;
         velY = 5;
     }

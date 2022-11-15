@@ -32,7 +32,7 @@ public class Map {
         // basically take care of most of the
         //handler.addObject(new Box(0,0,ID.box));
         handler.addObject(new Player(100,100,ID.player,handler));
-        handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+        //handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
     }
 
     public void pause(){
@@ -50,7 +50,7 @@ public class Map {
 
     public void tick(){
         hud.tick();
-        spawner.tick();
+        //spawner.tick();
     }
 
     public void render(Graphics g){

@@ -44,7 +44,7 @@ public class Map {
     }
 
     public void display(Graphics g){
-        g.setColor(Color.GRAY);
+        g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0,0, WIDTH, HEIGHT-22);
     }
 

@@ -26,6 +26,7 @@ public class Game extends Canvas implements Runnable {
     private Menu menu;
     private Camera cam;
     private Map map;
+    private MouseInput mouseInput;
 
     public static int mapWIDTH, mapHEIGHT;
 
@@ -46,8 +47,9 @@ public class Game extends Canvas implements Runnable {
         spawner = new Spawn(handler,hud);
         map = new Map(this,handler,hud);
         menu = new Menu(handler,this,hud,map);
+        mouseInput = new MouseInput(handler,this,map);
         this.addKeyListener(new KeyInput(handler,this));
-        this.addMouseListener(menu);
+        this.addMouseListener(mouseInput);
         cam = new Camera(0,0,handler);
 
         mapWIDTH = map.getWIDTH();

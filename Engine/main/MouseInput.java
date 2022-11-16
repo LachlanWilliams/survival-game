@@ -17,8 +17,6 @@ public class MouseInput extends MouseAdapter {
         this.game = game;
         this.map = map;
 
-
-
     }
 
     public void mousePressed(MouseEvent e){

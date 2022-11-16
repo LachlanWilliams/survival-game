@@ -67,4 +67,9 @@ public class Trail extends GameObject {
         g2d.setComposite(makeTransparent(1));
 
     }
+
+    @Override
+    public void hurt() {
+
+    }
 }

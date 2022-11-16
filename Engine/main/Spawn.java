@@ -1,6 +1,7 @@
 package Engine.main;
 
 import Engine.main.Objects.Enemy;
+import Engine.main.Objects.SmartEnemy;
 
 import java.awt.*;
 import java.util.Random;
@@ -22,7 +23,7 @@ public class Spawn {
     public void tick(){
         if (levelTrack != hud.getLevel()){
             levelTrack = hud.getLevel();
-            handler.addObject(new Enemy(r.nextInt(Game.WIDTH),r.nextInt(Game.HEIGHT),ID.enemy,handler));
+            handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH),r.nextInt(Game.HEIGHT),ID.smartEnemy,handler));
 
         }
 

@@ -37,4 +37,9 @@ public class Enemy extends GameObject {
         g.fillRect((int)x,(int)y,16,16);
 
     }
+
+    @Override
+    public void hurt() {
+
+    }
 }

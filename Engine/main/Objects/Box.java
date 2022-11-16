@@ -24,6 +24,11 @@ public class Box extends GameObject{
     }
 
     @Override
+    public void hurt() {
+
+    }
+
+    @Override
     public Rectangle getBounds() {
         return null;
     }

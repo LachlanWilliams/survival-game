@@ -50,15 +50,21 @@ public class Bullet extends GameObject{
     }
 
     @Override
+    public void hurt() {
+
+    }
+
+    @Override
     public Rectangle getBounds(){return new Rectangle((int)x,(int)y,10,10);}
 
     private void collision(){
         for(int i = 0; i < handler.objects.size(); i++){
             GameObject tempObject = handler.objects.get(i);
 
-            if(tempObject.getId() == ID.enemy){
+            if(tempObject.getId() == ID.smartEnemy){
                 if(getBounds().intersects(tempObject.getBounds())){
-                    handler.removeObject(tempObject);
+                    tempObject.hurt();
+                    //handler.removeObject(tempObject);
 
                 }
             }

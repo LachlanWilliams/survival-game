@@ -48,4 +48,9 @@ public class Player extends GameObject {
         g.fillRect((int)x,(int)y,32,32);
 
     }
+
+    @Override
+    public void hurt() {
+
+    }
 }

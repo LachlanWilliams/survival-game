@@ -1,6 +1,7 @@
 package Engine.main.Objects;
 
 import Engine.main.Game;
+import Engine.main.HUD;
 import Engine.main.Handler;
 import Engine.main.ID;
 
@@ -39,6 +40,7 @@ public class Bullet extends GameObject{
 
         handler.addObject(new Trail((int)x,(int)y,ID.trail,Color.yellow,width,height, 0.1f,handler));
 
+        collision();
     }
 
     @Override
@@ -48,7 +50,19 @@ public class Bullet extends GameObject{
     }
 
     @Override
-    public Rectangle getBounds() {
-        return null;
+    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,10,10);}
+
+    private void collision(){
+        for(int i = 0; i < handler.objects.size(); i++){
+            GameObject tempObject = handler.objects.get(i);
+
+            if(tempObject.getId() == ID.enemy){
+                if(getBounds().intersects(tempObject.getBounds())){
+                    handler.removeObject(tempObject);
+
+                }
+            }
+        }
     }
+
 }

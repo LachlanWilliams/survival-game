@@ -4,10 +4,12 @@ import Engine.main.Objects.Box;
 import Engine.main.Objects.Enemy;
 import Engine.main.Objects.Player;
 import Engine.main.KeyInput;
+import Engine.main.Objects.PowerUps.ItemSpawn;
 import Engine.main.Objects.SmartEnemy;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 
@@ -22,7 +24,6 @@ public class Game extends Canvas implements Runnable {
 
     private final Handler handler;
     private HUD hud;
-    private Spawn spawner;
     private Menu menu;
     private Camera cam;
     private Map map;
@@ -39,12 +40,13 @@ public class Game extends Canvas implements Runnable {
 
     public STATE gameState = STATE.Menu;
 
+    public static BufferedImage sprite_sheet;
+
     public Game(){
         System.out.println("Note: game created");
 
         handler = new Handler(this);
         hud = new HUD();
-        spawner = new Spawn(handler,hud);
         map = new Map(this,handler,hud);
         menu = new Menu(handler,this,hud,map);
         //mouseInput = new MouseInput(handler,this,map);
@@ -59,6 +61,10 @@ public class Game extends Canvas implements Runnable {
 
         //new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
         new Window(640,480,"RANDOM CUBE GAME",this);
+
+        BufferedImageLoader loader = new BufferedImageLoader();
+
+        sprite_sheet = loader.loadImage("/sprite_sheet2.png");
 
         if(gameState == STATE.Game){
             map.play();

@@ -1,30 +1,33 @@
 package Engine.main.Objects;
 
-import Engine.main.Game;
-import Engine.main.HUD;
-import Engine.main.Handler;
-import Engine.main.ID;
+import Engine.main.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
 
     Handler handler;
+    private BufferedImage player_image;
+    private int objectWidth = 64, objectHeight = 64;
 
-    public Player(int x, int y, ID id, Handler handler) {
-        super(x, y, id);
+    public Player(int x, int y, Handler handler) {
+        super(x, y,ID.player);
         this.handler = handler;
+
+        SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
+        player_image = ss.getImage(1,1,objectWidth,objectHeight);
     }
 
-    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,32,32);}
+    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,objectWidth,objectHeight);}
 
     @Override
     public void tick() {
         x += velX;
         y += velY;
 
-        x = Game.clamp(x,0,Game.mapWIDTH-32);
-        y = Game.clamp(y,0,Game.mapHEIGHT-54);
+        x = Game.clamp(x,0,Game.mapWIDTH-objectWidth);
+        y = Game.clamp(y,0,Game.mapHEIGHT-(20+objectHeight));
 
         collision();
     }
@@ -44,8 +47,9 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect((int)x,(int)y,32,32);
+        //g.setColor(Color.blue);
+        //g.fillRect((int)x,(int)y,32,32);
+        g.drawImage(player_image,(int)x,(int)y,null);
 
     }
 

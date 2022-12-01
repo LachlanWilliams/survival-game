@@ -8,4 +8,5 @@ public enum ID {
     trail(),
     box(),
     camera(),
+    bomb()
 }

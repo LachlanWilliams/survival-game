@@ -1,20 +1,20 @@
 package Engine.main.Objects;
 
-import Engine.main.Game;
-import Engine.main.HUD;
-import Engine.main.Handler;
-import Engine.main.ID;
+import Engine.main.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Bullet extends GameObject{
 
     private Handler handler;
     private float speed = 10;
-    private int width = 10, height = 10;
+    private int objectWidth = 20, objectHeight = 20;
+    private BufferedImage bullet_image;
 
-    public Bullet(float x, float y, ID id, Handler handler, int mxf, int myf) {
-        super(x, y, id);
+
+    public Bullet(float x, float y, Handler handler, int mxf, int myf) {
+        super(x, y, ID.bullet);
 
         float mx = x-332+mxf;
         float my = y-252+myf;
@@ -28,6 +28,9 @@ public class Bullet extends GameObject{
 
         this.handler = handler;
         this.id = id;
+
+        SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
+        bullet_image = ss.getImage(5,1,objectWidth,objectHeight);
     }
 
     @Override
@@ -38,15 +41,16 @@ public class Bullet extends GameObject{
         if(y <= 0 || y >= Game.mapHEIGHT-10) handler.removeObject(this);
         if(x <= 0 || x >= Game.mapWIDTH-5) handler.removeObject(this);
 
-        handler.addObject(new Trail((int)x,(int)y,ID.trail,Color.yellow,width,height, 0.1f,handler));
+        //handler.addObject(new Trail((int)x,(int)y,Color.yellow,width,height, 0.1f,handler));
 
         collision();
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillRect((int)x,(int)y,width,height);
+        //g.setColor(Color.yellow);
+        //g.fillRect((int)x,(int)y,width,height);
+        g.drawImage(bullet_image,(int)x,(int)y,null);
     }
 
     @Override
@@ -55,7 +59,7 @@ public class Bullet extends GameObject{
     }
 
     @Override
-    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,10,10);}
+    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,objectWidth,objectHeight);}
 
     private void collision(){
         for(int i = 0; i < handler.objects.size(); i++){

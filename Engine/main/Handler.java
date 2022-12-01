@@ -45,6 +45,20 @@ public class Handler {
         objects.clear();
     }
 
+    public void bomb(){
+        while(containsEnemy()){
+            for(int i = 0; i < objects.size(); i++) {
+                GameObject tempObject = objects.get(i);
+
+                if (objects.get(i).getId() == ID.enemy || objects.get(i).getId() == ID.smartEnemy) {
+                    this.removeObject(tempObject);
+
+                }
+            }
+
+        }
+    }
+
     public void clearEnemys(){
         for(int i = 0; i < objects.size(); i++){
             GameObject tempObject = objects.get(i);
@@ -52,7 +66,7 @@ public class Handler {
             if(objects.get(i).getId() == ID.player){
                 objects.clear();
                 if(game.gameState != Game.STATE.End){
-                    addObject(new Player((int) tempObject.getX(),(int) tempObject.getY(), ID.player,this));
+                    addObject(new Player((int) tempObject.getX(),(int) tempObject.getY(),this));
 
                 }
             }
@@ -64,5 +78,13 @@ public class Handler {
                 objects.remove(objects.get(i));
             }
         }
+    }
+    public boolean containsEnemy(){
+        for(int i = 0; i < objects.size(); i++){
+            if (objects.get(i).getId() == ID.enemy || objects.get(i).getId() == ID.smartEnemy){
+                return true;
+            }
+        }
+        return false;
     }
 }

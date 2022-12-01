@@ -26,7 +26,7 @@ public class MouseInput extends MouseAdapter {
         // all buttons for menu
         if(game.gameState == Game.STATE.Game){
             findPlayer();
-            handler.addObject(new Bullet(player.getX()+13, player.getY()+12, ID.bullet,handler, mx, my));
+            handler.addObject(new Bullet(player.getX()+13, player.getY()+12,handler, mx, my));
 
             //handler.addObject(new Bullet());
         }

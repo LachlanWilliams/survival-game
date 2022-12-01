@@ -2,6 +2,8 @@ package Engine.main;
 
 import Engine.main.Objects.Box;
 import Engine.main.Objects.Player;
+import Engine.main.Objects.PowerUps.Bomb;
+import Engine.main.Objects.PowerUps.ItemSpawn;
 import Engine.main.Objects.SmartEnemy;
 
 import java.awt.*;
@@ -11,6 +13,7 @@ public class Map {
     private Handler handler;
     private HUD hud;
     private Spawn spawner;
+    private ItemSpawn itemSpawner;
     private static final int WIDTH = 640;
     private static final int HEIGHT = 480;
 
@@ -21,12 +24,14 @@ public class Map {
         this.hud = hud;
 
         spawner = new Spawn(handler,hud);
+        itemSpawner = new ItemSpawn(handler,hud);
     }
 
     public void play(){
         // this method will run when changing from menu to game
-        handler.addObject(new Player(100,100,ID.player,handler));
-        handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+        handler.addObject(new Player(100,100,handler));
+        handler.addObject(new SmartEnemy(250,250,handler));
+        handler.addObject(new Bomb(250,300,handler));
     }
 
     public void pause(){
@@ -45,6 +50,7 @@ public class Map {
     public void tick(){
         hud.tick();
         spawner.tick();
+        itemSpawner.tick();
     }
 
     public void render(Graphics g){

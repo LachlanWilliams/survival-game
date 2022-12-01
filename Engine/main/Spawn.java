@@ -22,8 +22,10 @@ public class Spawn {
 
     public void tick(){
         if (levelTrack != hud.getLevel()){
+            //System.out.println(handler.objects.size());
+
             levelTrack = hud.getLevel();
-            handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH),r.nextInt(Game.HEIGHT),ID.smartEnemy,handler));
+            handler.addObject(new SmartEnemy(r.nextInt(Game.mapWIDTH),r.nextInt(Game.mapHEIGHT),handler));
 
         }
 

@@ -1,20 +1,26 @@
 package Engine.main.Objects.PowerUps;
 
-import Engine.main.HUD;
+import Engine.main.Game;
 import Engine.main.Handler;
 import Engine.main.ID;
 import Engine.main.Objects.GameObject;
+import Engine.main.SpriteSheet;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Bomb extends GameObject {
 
     Handler handler;
+    private BufferedImage bomb_image;
 
     public Bomb(float x, float y, Handler handler) {
         super(x, y, ID.bomb);
 
         this.handler = handler;
+
+        SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
+        bomb_image = ss.getImage(3,3,32,32);
 
     }
 
@@ -25,8 +31,9 @@ public class Bomb extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.orange);
-        g.fillRect((int)x,(int)y,16,16);
+        //g.setColor(Color.orange);
+        //g.fillRect((int)x,(int)y,16,16);
+        g.drawImage(bomb_image,(int)x,(int)y,null);
 
     }
 

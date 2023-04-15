@@ -68,6 +68,7 @@ public class Bullet extends GameObject{
             if(tempObject.getId() == ID.smartEnemy){
                 if(getBounds().intersects(tempObject.getBounds())){
                     tempObject.hurt();
+                    handler.removeObject(this);
                     //handler.removeObject(tempObject);
 
                 }

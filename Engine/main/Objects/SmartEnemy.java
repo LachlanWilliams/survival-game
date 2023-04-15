@@ -13,7 +13,7 @@ public class SmartEnemy extends GameObject {
     private Handler handler;
     private GameObject player;
     private float speed = 2;
-    private int health = 3;
+    private int health = 2;
     private BufferedImage smartEnemy_image;
 
     public SmartEnemy(float x, float y, Handler handler) {
@@ -53,6 +53,7 @@ public class SmartEnemy extends GameObject {
     }
 
     public void hurt(){
+
         health = health-1;
         if(health == 0){
             handler.removeObject(this);

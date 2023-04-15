@@ -22,11 +22,17 @@ public class Spawn {
 
     public void tick(){
         if (levelTrack != hud.getLevel()){
+            /*
+            * Spawns a new enemy every time you get 100 score.
+            * */
             //System.out.println(handler.objects.size());
 
             levelTrack = hud.getLevel();
             handler.addObject(new SmartEnemy(r.nextInt(Game.mapWIDTH),r.nextInt(Game.mapHEIGHT),handler));
 
+        }
+        if (levelTrack%10 == 0){
+            //handler.addObject();
         }
 
     }

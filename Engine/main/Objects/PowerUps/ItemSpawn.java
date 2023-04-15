@@ -25,12 +25,12 @@ public class ItemSpawn {
     public void tick(){
         int level = (int) hud.getLevel();
 
-        if ((rInterval+levelTrack)%level==0){
-            //System.out.println(hud.getLevel());
-            //handler.addObject(new Bomb(r.nextInt(Game.mapWIDTH),r.nextInt(Game.mapHEIGHT),handler));
+        if ((rInterval+levelTrack)==level){
+            System.out.println(hud.getLevel());
+            handler.addObject(new Bomb(r.nextInt(Game.mapWIDTH),r.nextInt(Game.mapHEIGHT),handler));
 
-            //rInterval = r.nextInt(5);
-           // levelTrack += 10;
+            rInterval = r.nextInt(5);
+            levelTrack += 10;
 
         }
 

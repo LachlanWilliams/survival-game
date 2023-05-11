@@ -1,9 +1,6 @@
 package Engine.main.Objects;
 
-import Engine.main.Game;
-import Engine.main.Handler;
-import Engine.main.ID;
-import Engine.main.SpriteSheet;
+import Engine.main.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +9,7 @@ public class SmartEnemy extends GameObject {
 
     private Handler handler;
     private GameObject player;
+    private int objectWidth = 32, objectHeight = 32;
     private float speed = 2;
     private int health = 2;
     private BufferedImage smartEnemy_image;
@@ -22,7 +20,7 @@ public class SmartEnemy extends GameObject {
         this.handler = handler;
 
         SpriteSheet ss = new SpriteSheet(Game.sprite_sheet);
-        smartEnemy_image = ss.getImage(1,3,32,32);
+        smartEnemy_image = ss.getImage(1,3,objectWidth,objectHeight);
 
         for(int i = 0; i < handler.objects.size();i++){
             if(handler.objects.get(i).getId() == ID.player){
@@ -32,7 +30,7 @@ public class SmartEnemy extends GameObject {
 
     }
 
-    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,32,32);}
+    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,objectWidth,objectHeight);}
 
     @Override
     public void tick() {
@@ -57,6 +55,19 @@ public class SmartEnemy extends GameObject {
         health = health-1;
         if(health == 0){
             handler.removeObject(this);
+        }
+    }
+
+    private void collision(){
+        for(int i = 0; i < handler.objects.size(); i++){
+            GameObject tempObject = handler.objects.get(i);
+
+            if(tempObject.getId() == ID.enemy || tempObject.getId() == ID.smartEnemy){
+                if(getBounds().intersects(tempObject.getBounds())){
+                    HUD.HEALTH -= 2;
+
+                }
+            }
         }
     }
 

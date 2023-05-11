@@ -5,17 +5,22 @@ import Engine.main.Objects.GameObject;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
-public class MouseInput extends MouseAdapter {
+public class MouseInput extends MouseAdapter implements MouseMotionListener {
     private Handler handler;
     private Game game;
     private Map map;
     private GameObject player;
 
+    private int mx;
+    private int my;
+
     private boolean isMousePressed = false;
     private Thread thread;
 
     public MouseInput(Handler handler, Game game, Map map){
+        game.addMouseMotionListener(this);
         this.handler = handler;
         this.game = game;
         this.map = map;
@@ -25,12 +30,13 @@ public class MouseInput extends MouseAdapter {
     public void mousePressed(MouseEvent e){
         isMousePressed = true;
 
+        mx = e.getX();
+        my = e.getY();
+
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (isMousePressed) {
-                    int mx = e.getX();
-                    int my = e.getY();
                     // call your function repeatedly here
 
 
@@ -38,11 +44,9 @@ public class MouseInput extends MouseAdapter {
                     if (game.gameState == Game.STATE.Game) {
                         findPlayer();
                         try {
-                            System.out.println("going to sleep ");
                             thread.sleep(200); // delay for 1000 milliseconds (1 second)
                         } catch (InterruptedException e) {
                             thread.currentThread().interrupt(); // preserve the interrupted status
-                            System.out.println("sleep interupted");
                             e.printStackTrace();
                         }
                         handler.addObject(new Bullet(player.getX() + 13, player.getY() + 12, handler, mx, my));
@@ -93,6 +97,13 @@ public class MouseInput extends MouseAdapter {
     public void mouseReleased(MouseEvent e){
         isMousePressed = false;
         thread.currentThread().interrupt();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mx = e.getX();
+        my = e.getY();
+        // do something with x and y
     }
 
     public boolean mouseOver(int mx, int my, int x , int y, int width, int height){
